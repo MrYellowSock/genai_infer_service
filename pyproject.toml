@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "genai-infer-service"
+version = "0.1.0"
+description = "a microservice for genai inference with template"
+authors = ["suppanut"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["standard"], version = "^0.112.2"}
+langchain = "^0.2.14"
+pydantic = "^2.8.2"
+google-generativeai = "^0.7.2"
+langchain-google-genai = "^1.0.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
