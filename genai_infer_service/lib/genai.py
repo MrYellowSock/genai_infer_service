@@ -18,6 +18,10 @@ def get_available_models():
 def consume_model(prompt:PromptInferMessage, config:PromptInferAiConfig):
     for name,func in functions:
         if hasattr(func,'id') and func.id == config.genai_model:
-            # TODO : What else should we return.
-            return func(prompt,config)
+            # What else should we return.
+            return {
+                "prompt":prompt.get_preview(),
+                "config":config,
+                "output":func(prompt,config)
+            }
     raise ModuleNotFoundError(f"no genai with id {config.genai_model}")

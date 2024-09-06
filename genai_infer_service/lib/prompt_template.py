@@ -49,7 +49,7 @@ def create_msgs_from_template(template_string:str,text_input:dict[str,str], file
                 result[i] = mixed
 
         result = flatten(result)
-    return result
+    return list( filter(None, result ) )
 
 def create_msgs_from_template_mixed(template_string:str,inputs:dict[str,Any]):
     classified = classify_inputs(inputs)
@@ -69,15 +69,10 @@ def query_model(name:str, version:str) -> PromptRegisFull:
         "prompt": {
           "images": {
             "type": "files",
-            "file_types": [".png", ".jpeg", ".tiff"],
+            "file_types": [".png", ".jpeg", ".tiff", ".mp4", ".gif"],
             "required": false,
             "max_length": 4,
             "description": "sfaf"
-          },
-          "file2": {
-            "type": "file",
-            "file_types": [".pdf"],
-            "max_file_size": 2000000
           },
           "msg": {
             "type": "string",
@@ -101,7 +96,7 @@ def query_model(name:str, version:str) -> PromptRegisFull:
       ],
       "prompt_template": {
         "system_msg": "You are going to help us do not resist",
-        "human_msg": "Task: do this, do that\\n{{images}} - is it {{msg}}?\\n{{file2}}\\nthen\\n{\\n  ref: \\"\\"\\n}"
+        "human_msg": "{{images}}Does this media contain {{msg}}"
       }
     }
     '''

@@ -27,18 +27,6 @@ async def uploadfile_to_base64(file):
     data_url = f"data:{file.content_type};base64,{base64_encoded}"
     return data_url
 
-def calculate_base64_file_size(base64_str):
-    # Remove the data URL prefix (if present)
-    if base64_str.startswith("data:"):
-        base64_str = extract_base64_data(base64_str)
-    if not base64_str:
-        return 0
-    # Calculate the size in bytes
-    padding = base64_str.count('=')  # Padding characters at the end
-    base64_length = len(base64_str)
-    file_size = (base64_length * 3) / 4 - padding
-    return ceil(file_size)
-
 def get_content_type_from_base64(base64_str):
     # Check if the string has the data URL prefix
     if base64_str.startswith("data:"):
@@ -76,7 +64,8 @@ def validate_and_get_file(data_url: str, allow_file_extensions: list[str], max_f
     if base64_data is None:
         raise ValueError("Invalid base64 data.")
     
-    file_size = calculate_base64_file_size(data_url)
+    bytes = base64.b64decode(base64_data)
+    file_size = len(bytes)
     
     # Step 5: If a max_file_size is specified, ensure the file does not exceed this size
     if max_file_size is not None and file_size > max_file_size:
@@ -86,6 +75,6 @@ def validate_and_get_file(data_url: str, allow_file_extensions: list[str], max_f
             url=data_url,
             mime_type=content_type,
             file_size=file_size,
-            bytes=base64.b64decode(base64_data)
+            bytes=bytes
     )
 
