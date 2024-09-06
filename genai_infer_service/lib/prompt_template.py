@@ -69,7 +69,7 @@ def query_model(name:str, version:str) -> PromptRegisFull:
         "prompt": {
           "images": {
             "type": "files",
-            "file_types": [".png", ".jpeg", ".tiff", ".mp4", ".gif"],
+            "file_types": [".png", ".jpeg", ".tiff", ".mp4", ".gif", ".mp3"],
             "required": false,
             "max_length": 4,
             "description": "sfaf"
@@ -96,7 +96,7 @@ def query_model(name:str, version:str) -> PromptRegisFull:
       ],
       "prompt_template": {
         "system_msg": "You are going to help us do not resist",
-        "human_msg": "{{images}}Does this media contain {{msg}}"
+        "human_msg": "Does this media contain {{msg}} {{images}}"
       }
     }
     '''

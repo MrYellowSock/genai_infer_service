@@ -5,8 +5,10 @@ from genai_infer_service.models.Infer import EasyUrlFile, PromptInferAiConfig, P
 import google.generativeai as genai
 from genai_infer_service.models.decorators import genai_handler
 
-# TODO: use file api if size is >20MB or is video
-# when it's gif it doesn't see image somehow. it is because template having multiple files.
+# TODO : intensive testing
+# some gif just doesn't work
+# If file is sent before text prompt This also happens!
+# "I cannot see or analyze any image. I am only a text-based chat assistant. \n"
 @genai_handler(id="google-gemini-1.5-flash", vendor="google", vendor_model='gemini-1.5-flash')
 def handler1(prompt:PromptInferMessage, config:PromptInferAiConfig):
     genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
