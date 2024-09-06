@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from genai_infer_service.routers.infer import router as infer_router
 from genai_infer_service.routers.model import router as model_router
-from genai_infer_service.routers.genai import router as genai_router
+from genai_infer_service.routers.llm import router as llm_router
 
 app = FastAPI()
 
@@ -11,7 +11,7 @@ app.include_router(infer_router, prefix="")
 # Include routes from model.py
 app.include_router(model_router, prefix="")
 
-app.include_router(genai_router, prefix="")
+app.include_router(llm_router, prefix="")
 
 # Optionally, add a root endpoint
 @app.get("/")

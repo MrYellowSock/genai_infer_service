@@ -4,6 +4,15 @@ from genai_infer_service.models.Infer import PromptInferMessage,PromptInferAiCon
 
 # Get all functions from the imported module
 functions = inspect.getmembers(genai_handlers, inspect.isfunction)
+# Collect all ids
+ids = set()
+
+for name, func in functions:
+    # Ensure the function has the 'id' attribute
+    if hasattr(func, 'id'):
+        if func.id in ids:
+            raise AssertionError(f"Duplicate id found: {func.id} in function {name}")
+        ids.add(func.id)
 
 def get_available_models():
     return [
