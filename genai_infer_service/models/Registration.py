@@ -2,6 +2,8 @@ import re
 from pydantic import BaseModel, Field,field_validator,ValidationInfo
 from typing import List, Literal, Optional,Any,TypeVar,Generic
 
+from genai_infer_service.lib.genai import get_available_ids
+
 class PromptRegisEntryInput(BaseModel):
     type: Literal['string', 'file', 'files']
     file_types: List[str]=Field(default=[])
@@ -63,7 +65,7 @@ class PromptRegisFull(BaseModel):
     genai_models: List[str]
     prompt_template:PromptRegisMessage
 
-    # TODO : validate valid models?
+    # TODO : validate valid models? likely not
     @field_validator("genai_models")
     def validate_genai_models(cls,v:list[str])->list[str]:
         if len(v) < 1:

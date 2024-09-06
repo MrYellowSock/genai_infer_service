@@ -24,6 +24,9 @@ def get_available_models():
         for name,func in functions if hasattr(func,'id')
     ]
 
+def get_available_ids():
+    return ids
+
 def consume_model(prompt:PromptInferMessage, config:PromptInferAiConfig):
     for name,func in functions:
         if hasattr(func,'id') and func.id == config.genai_model:
