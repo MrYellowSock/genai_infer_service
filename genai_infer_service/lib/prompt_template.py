@@ -55,10 +55,10 @@ def create_msgs_from_template_mixed(template_string:str,inputs:dict[str,Any]):
     classified = classify_inputs(inputs)
     return create_msgs_from_template(template_string, classified["text_input"], classified["file_input"])
 
-def query_model(name:str, version:str) -> PromptRegisFull:
-    # TODO : pull stuff out of db
-    # Return dummy for now.
+def save_model(name:str, version:str, template:PromptRegisFull):
+    return
 
+def query_model(name:str, version:str) -> PromptRegisFull:
     # Example JSON string
     # TODO : pull stuff out of db
     # Return dummy for now.

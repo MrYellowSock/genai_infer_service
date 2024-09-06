@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, UploadFile
 from genai_infer_service.lib.openapi import create_openapi_spec, get_swag_input_fields
-from genai_infer_service.lib.prompt_template import query_model
+from genai_infer_service.lib.prompt_template import query_model, save_model
 from genai_infer_service.models.Registration import PromptRegisFull
 from fastapi.templating import Jinja2Templates
 from genai_infer_service.routers.infer import openapi_infer_responses_schema
@@ -13,6 +13,7 @@ def get_model_regular(name:str, version:str) -> PromptRegisFull :
 
 @router.put("/genai/prompts/{name}/versions/{version}")
 def put_model_regular(name:str, version:str, template:PromptRegisFull):
+    save_model(name,version,template)
     return {}
 
 @router.get("/genai/prompts/{name}/versions/{version}/openapi")
