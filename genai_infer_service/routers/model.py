@@ -13,7 +13,6 @@ def get_model_regular(name:str, version:str) -> PromptRegisFull :
 
 @router.put("/genai/prompts/{name}/versions/{version}")
 def put_model_regular(name:str, version:str, template:PromptRegisFull):
-    # TODO : VALIDATE MIME TYPE WITH THE GENAI_HANDLER!
     return {}
 
 @router.get("/genai/prompts/{name}/versions/{version}/openapi")
